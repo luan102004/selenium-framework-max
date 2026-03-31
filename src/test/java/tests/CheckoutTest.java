@@ -15,12 +15,11 @@ import pages.*;
 public class CheckoutTest extends BaseTest {
 
     private String getUsername() {
-        String v = System.getenv("APP_USERNAME");
-        return (v != null && !v.isBlank()) ? v : "standard_user";
+        return System.getenv("SAUCEDEMO_USERNAME");
     }
+
     private String getPassword() {
-        String v = System.getenv("APP_PASSWORD");
-        return (v != null && !v.isBlank()) ? v : "secret_sauce";
+        return System.getenv("SAUCEDEMO_PASSWORD");
     }
 
     @Test(groups = "smoke")
@@ -30,16 +29,14 @@ public class CheckoutTest extends BaseTest {
     public void checkoutFlow() {
         // FIX: Dùng Page Objects — Fluent Interface
         CheckoutPage checkout = new LoginPage(getDriver())
-            .login(getUsername(), getPassword())
-            .addFirstItemToCart()
-            .goToCart()
-            .goToCheckout();
+                .login(getUsername(), getPassword())
+                .addFirstItemToCart()
+                .goToCart()
+                .goToCheckout();
 
-        Allure.step("Điền thông tin giao hàng", () ->
-            checkout.fillInfo("Nguyen", "Van A", "700000"));
+        Allure.step("Điền thông tin giao hàng", () -> checkout.fillInfo("Nguyen", "Van A", "700000"));
 
-        Allure.step("Kiểm tra chuyển sang trang overview", () ->
-            Assert.assertTrue(checkout.isOnOverviewPage(),
+        Allure.step("Kiểm tra chuyển sang trang overview", () -> Assert.assertTrue(checkout.isOnOverviewPage(),
                 "Phải chuyển sang trang checkout-step-two"));
     }
 }
