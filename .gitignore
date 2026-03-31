@@ -1,0 +1,13 @@
+target/
+.idea/
+*.iml
+.vscode/
+screenshots/
+target/screenshots/
+target/allure-results/
+target/allure-report/
+target/site/
+.env
+*.log
+.DS_Store
+Thumbs.db

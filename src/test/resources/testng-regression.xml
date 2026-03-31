@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Suite" verbose="1" parallel="methods" thread-count="3">
+    <listeners>
+        <listener class-name="utils.RetryListener"/>
+    </listeners>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="dev"/>
+    <test name="All Tests">
+        <groups><run><include name="smoke"/><include name="regression"/></run></groups>
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.CartTest"/>
+            <class name="tests.CheckoutTest"/>
+        </classes>
+    </test>
+</suite>

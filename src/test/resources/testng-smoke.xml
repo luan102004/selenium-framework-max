@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke Suite" verbose="1" parallel="tests" thread-count="2">
+    <listeners>
+        <listener class-name="utils.RetryListener"/>
+    </listeners>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="dev"/>
+    <test name="Login Smoke">
+        <groups><run><include name="smoke"/></run></groups>
+        <classes><class name="tests.LoginTest"/></classes>
+    </test>
+    <test name="Cart Smoke">
+        <groups><run><include name="smoke"/></run></groups>
+        <classes>
+            <class name="tests.CartTest"/>
+            <class name="tests.CheckoutTest"/>
+        </classes>
+    </test>
+</suite>
