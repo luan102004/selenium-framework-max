@@ -15,12 +15,11 @@ import pages.*;
 public class CartTest extends BaseTest {
 
     private String getUsername() {
-        String v = System.getenv("APP_USERNAME");
-        return (v != null && !v.isBlank()) ? v : "standard_user";
+        return System.getenv("SAUCEDEMO_USERNAME");
     }
+
     private String getPassword() {
-        String v = System.getenv("APP_PASSWORD");
-        return (v != null && !v.isBlank()) ? v : "secret_sauce";
+        return System.getenv("SAUCEDEMO_PASSWORD");
     }
 
     private InventoryPage doLogin() {
@@ -34,14 +33,11 @@ public class CartTest extends BaseTest {
     public void addToCart() {
         InventoryPage inventory = doLogin();
 
-        Allure.step("Kiểm tra trang inventory đã load", () ->
-            Assert.assertTrue(inventory.isLoaded()));
+        Allure.step("Kiểm tra trang inventory đã load", () -> Assert.assertTrue(inventory.isLoaded()));
 
-        Allure.step("Thêm sản phẩm đầu tiên", () ->
-            inventory.addFirstItemToCart());
+        Allure.step("Thêm sản phẩm đầu tiên", () -> inventory.addFirstItemToCart());
 
-        Allure.step("Badge giỏ hàng phải là 1", () ->
-            Assert.assertEquals(inventory.getCartItemCount(), 1));
+        Allure.step("Badge giỏ hàng phải là 1", () -> Assert.assertEquals(inventory.getCartItemCount(), 1));
     }
 
     @Test(groups = "smoke")
@@ -50,8 +46,7 @@ public class CartTest extends BaseTest {
     public void viewCart() {
         CartPage cart = doLogin().addFirstItemToCart().goToCart();
 
-        Allure.step("Giỏ hàng phải có 1 sản phẩm", () ->
-            Assert.assertEquals(cart.getItemCount(), 1,
+        Allure.step("Giỏ hàng phải có 1 sản phẩm", () -> Assert.assertEquals(cart.getItemCount(), 1,
                 "Giỏ hàng phải có đúng 1 item"));
     }
 
@@ -61,7 +56,7 @@ public class CartTest extends BaseTest {
     public void cartEmptyOnLogin() {
         InventoryPage inventory = doLogin();
         Assert.assertEquals(inventory.getCartItemCount(), 0,
-            "Giỏ hàng phải rỗng khi mới đăng nhập");
+                "Giỏ hàng phải rỗng khi mới đăng nhập");
     }
 
     @Test(groups = "regression")
